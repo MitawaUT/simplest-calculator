@@ -5182,7 +5182,7 @@ var $elm$core$String$toFloat = _String_toFloat;
 var $author$project$Main$normalizeDigits = function (s) {
 	return A2(
 		$elm$core$String$left,
-		8,
+		12,
 		function () {
 			var _v0 = $elm$core$String$toFloat(s);
 			if (_v0.$ === 1) {
@@ -5247,7 +5247,6 @@ var $author$project$Main$Operator = function (a) {
 var $author$project$Main$Value = function (a) {
 	return {$: 0, a: a};
 };
-var $elm$html$Html$button = _VirtualDom_node('button');
 var $elm$json$Json$Encode$string = _Json_wrap;
 var $elm$html$Html$Attributes$stringProperty = F2(
 	function (key, string) {
@@ -5258,23 +5257,6 @@ var $elm$html$Html$Attributes$stringProperty = F2(
 	});
 var $elm$html$Html$Attributes$class = $elm$html$Html$Attributes$stringProperty('className');
 var $elm$html$Html$div = _VirtualDom_node('div');
-var $elm$virtual_dom$VirtualDom$Normal = function (a) {
-	return {$: 0, a: a};
-};
-var $elm$virtual_dom$VirtualDom$on = _VirtualDom_on;
-var $elm$html$Html$Events$on = F2(
-	function (event, decoder) {
-		return A2(
-			$elm$virtual_dom$VirtualDom$on,
-			event,
-			$elm$virtual_dom$VirtualDom$Normal(decoder));
-	});
-var $elm$html$Html$Events$onClick = function (msg) {
-	return A2(
-		$elm$html$Html$Events$on,
-		'click',
-		$elm$json$Json$Decode$succeed(msg));
-};
 var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
 var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
 var $author$project$Main$updateAddOperator = function (model) {
@@ -5292,7 +5274,8 @@ var $author$project$Main$updateAddOperator = function (model) {
 			m,
 			{
 				a: '0',
-				f: $elm$core$String$fromFloat(a + b),
+				f: $author$project$Main$normalizeDigits(
+					$elm$core$String$fromFloat(a + b)),
 				k: function (lam) {
 					return lam;
 				}
@@ -5319,7 +5302,7 @@ var $author$project$Main$updateEqOperator = function (model) {
 	if (!_v1) {
 		return _Utils_update(
 			m,
-			{a: m.a, l: 2});
+			{a: m.a, f: m.a, l: 2});
 	} else {
 		var opm = m.k(m);
 		var mm = opm;
@@ -5343,7 +5326,8 @@ var $author$project$Main$updateMultOperator = function (model) {
 			m,
 			{
 				a: '0',
-				f: $elm$core$String$fromFloat(a * b),
+				f: $author$project$Main$normalizeDigits(
+					$elm$core$String$fromFloat(a * b)),
 				k: function (lam) {
 					return lam;
 				}
@@ -5367,7 +5351,8 @@ var $author$project$Main$updateQuotOperator = function (model) {
 			m,
 			{
 				a: '0',
-				f: $elm$core$String$fromFloat(a / b),
+				f: $author$project$Main$normalizeDigits(
+					$elm$core$String$fromFloat(a / b)),
 				k: function (lam) {
 					return lam;
 				}
@@ -5391,7 +5376,8 @@ var $author$project$Main$updateSubOperator = function (model) {
 			m,
 			{
 				a: '0',
-				f: $elm$core$String$fromFloat(a - b),
+				f: $author$project$Main$normalizeDigits(
+					$elm$core$String$fromFloat(a - b)),
 				k: function (lam) {
 					return lam;
 				}
@@ -5400,6 +5386,38 @@ var $author$project$Main$updateSubOperator = function (model) {
 		return model;
 	}
 };
+var $elm$html$Html$button = _VirtualDom_node('button');
+var $elm$virtual_dom$VirtualDom$Normal = function (a) {
+	return {$: 0, a: a};
+};
+var $elm$virtual_dom$VirtualDom$on = _VirtualDom_on;
+var $elm$html$Html$Events$on = F2(
+	function (event, decoder) {
+		return A2(
+			$elm$virtual_dom$VirtualDom$on,
+			event,
+			$elm$virtual_dom$VirtualDom$Normal(decoder));
+	});
+var $elm$html$Html$Events$onClick = function (msg) {
+	return A2(
+		$elm$html$Html$Events$on,
+		'click',
+		$elm$json$Json$Decode$succeed(msg));
+};
+var $author$project$Main$viewBtnGen = F2(
+	function (msg, fieldTxt) {
+		return A2(
+			$elm$html$Html$button,
+			_List_fromArray(
+				[
+					$elm$html$Html$Events$onClick(msg),
+					$elm$html$Html$Attributes$class('btn-flat-border')
+				]),
+			_List_fromArray(
+				[
+					$elm$html$Html$text(fieldTxt)
+				]));
+	});
 var $author$project$Main$view = function (model) {
 	var m = model;
 	return A2(
@@ -5426,53 +5444,21 @@ var $author$project$Main$view = function (model) {
 				_List_fromArray(
 					[
 						A2(
-						$elm$html$Html$button,
-						_List_fromArray(
-							[
-								$elm$html$Html$Events$onClick(
-								$author$project$Main$Value('1')),
-								$elm$html$Html$Attributes$class('btn-flat-border')
-							]),
-						_List_fromArray(
-							[
-								$elm$html$Html$text('1')
-							])),
+						$author$project$Main$viewBtnGen,
+						$author$project$Main$Value('1'),
+						'1'),
 						A2(
-						$elm$html$Html$button,
-						_List_fromArray(
-							[
-								$elm$html$Html$Events$onClick(
-								$author$project$Main$Value('2')),
-								$elm$html$Html$Attributes$class('btn-flat-border')
-							]),
-						_List_fromArray(
-							[
-								$elm$html$Html$text('2')
-							])),
+						$author$project$Main$viewBtnGen,
+						$author$project$Main$Value('2'),
+						'2'),
 						A2(
-						$elm$html$Html$button,
-						_List_fromArray(
-							[
-								$elm$html$Html$Events$onClick(
-								$author$project$Main$Value('3')),
-								$elm$html$Html$Attributes$class('btn-flat-border')
-							]),
-						_List_fromArray(
-							[
-								$elm$html$Html$text('3')
-							])),
+						$author$project$Main$viewBtnGen,
+						$author$project$Main$Value('3'),
+						'3'),
 						A2(
-						$elm$html$Html$button,
-						_List_fromArray(
-							[
-								$elm$html$Html$Events$onClick(
-								$author$project$Main$Operator($author$project$Main$updateAddOperator)),
-								$elm$html$Html$Attributes$class('btn-flat-border')
-							]),
-						_List_fromArray(
-							[
-								$elm$html$Html$text('+')
-							]))
+						$author$project$Main$viewBtnGen,
+						$author$project$Main$Operator($author$project$Main$updateAddOperator),
+						'+')
 					])),
 				A2(
 				$elm$html$Html$div,
@@ -5483,53 +5469,21 @@ var $author$project$Main$view = function (model) {
 				_List_fromArray(
 					[
 						A2(
-						$elm$html$Html$button,
-						_List_fromArray(
-							[
-								$elm$html$Html$Events$onClick(
-								$author$project$Main$Value('4')),
-								$elm$html$Html$Attributes$class('btn-flat-border')
-							]),
-						_List_fromArray(
-							[
-								$elm$html$Html$text('4')
-							])),
+						$author$project$Main$viewBtnGen,
+						$author$project$Main$Value('4'),
+						'4'),
 						A2(
-						$elm$html$Html$button,
-						_List_fromArray(
-							[
-								$elm$html$Html$Events$onClick(
-								$author$project$Main$Value('5')),
-								$elm$html$Html$Attributes$class('btn-flat-border')
-							]),
-						_List_fromArray(
-							[
-								$elm$html$Html$text('5')
-							])),
+						$author$project$Main$viewBtnGen,
+						$author$project$Main$Value('5'),
+						'5'),
 						A2(
-						$elm$html$Html$button,
-						_List_fromArray(
-							[
-								$elm$html$Html$Events$onClick(
-								$author$project$Main$Value('6')),
-								$elm$html$Html$Attributes$class('btn-flat-border')
-							]),
-						_List_fromArray(
-							[
-								$elm$html$Html$text('6')
-							])),
+						$author$project$Main$viewBtnGen,
+						$author$project$Main$Value('6'),
+						'6'),
 						A2(
-						$elm$html$Html$button,
-						_List_fromArray(
-							[
-								$elm$html$Html$Events$onClick(
-								$author$project$Main$Operator($author$project$Main$updateSubOperator)),
-								$elm$html$Html$Attributes$class('btn-flat-border')
-							]),
-						_List_fromArray(
-							[
-								$elm$html$Html$text('-')
-							]))
+						$author$project$Main$viewBtnGen,
+						$author$project$Main$Operator($author$project$Main$updateSubOperator),
+						'-')
 					])),
 				A2(
 				$elm$html$Html$div,
@@ -5540,65 +5494,25 @@ var $author$project$Main$view = function (model) {
 				_List_fromArray(
 					[
 						A2(
-						$elm$html$Html$button,
-						_List_fromArray(
-							[
-								$elm$html$Html$Events$onClick(
-								$author$project$Main$Value('7')),
-								$elm$html$Html$Attributes$class('btn-flat-border')
-							]),
-						_List_fromArray(
-							[
-								$elm$html$Html$text('7')
-							])),
+						$author$project$Main$viewBtnGen,
+						$author$project$Main$Value('7'),
+						'7'),
 						A2(
-						$elm$html$Html$button,
-						_List_fromArray(
-							[
-								$elm$html$Html$Events$onClick(
-								$author$project$Main$Value('8')),
-								$elm$html$Html$Attributes$class('btn-flat-border')
-							]),
-						_List_fromArray(
-							[
-								$elm$html$Html$text('8')
-							])),
+						$author$project$Main$viewBtnGen,
+						$author$project$Main$Value('8'),
+						'8'),
 						A2(
-						$elm$html$Html$button,
-						_List_fromArray(
-							[
-								$elm$html$Html$Events$onClick(
-								$author$project$Main$Value('9')),
-								$elm$html$Html$Attributes$class('btn-flat-border')
-							]),
-						_List_fromArray(
-							[
-								$elm$html$Html$text('9')
-							])),
+						$author$project$Main$viewBtnGen,
+						$author$project$Main$Value('9'),
+						'9'),
 						A2(
-						$elm$html$Html$button,
-						_List_fromArray(
-							[
-								$elm$html$Html$Events$onClick(
-								$author$project$Main$Operator($author$project$Main$updateMultOperator)),
-								$elm$html$Html$Attributes$class('btn-flat-border')
-							]),
-						_List_fromArray(
-							[
-								$elm$html$Html$text('*')
-							])),
+						$author$project$Main$viewBtnGen,
+						$author$project$Main$Operator($author$project$Main$updateMultOperator),
+						'*'),
 						A2(
-						$elm$html$Html$button,
-						_List_fromArray(
-							[
-								$elm$html$Html$Events$onClick(
-								$author$project$Main$Operator($author$project$Main$updateQuotOperator)),
-								$elm$html$Html$Attributes$class('btn-flat-border')
-							]),
-						_List_fromArray(
-							[
-								$elm$html$Html$text('/')
-							]))
+						$author$project$Main$viewBtnGen,
+						$author$project$Main$Operator($author$project$Main$updateQuotOperator),
+						'-')
 					])),
 				A2(
 				$elm$html$Html$div,
@@ -5609,53 +5523,21 @@ var $author$project$Main$view = function (model) {
 				_List_fromArray(
 					[
 						A2(
-						$elm$html$Html$button,
-						_List_fromArray(
-							[
-								$elm$html$Html$Events$onClick(
-								$author$project$Main$Value('00')),
-								$elm$html$Html$Attributes$class('btn-flat-border')
-							]),
-						_List_fromArray(
-							[
-								$elm$html$Html$text('00')
-							])),
+						$author$project$Main$viewBtnGen,
+						$author$project$Main$Value('00'),
+						'00'),
 						A2(
-						$elm$html$Html$button,
-						_List_fromArray(
-							[
-								$elm$html$Html$Events$onClick(
-								$author$project$Main$Value('0')),
-								$elm$html$Html$Attributes$class('btn-flat-border')
-							]),
-						_List_fromArray(
-							[
-								$elm$html$Html$text('0')
-							])),
+						$author$project$Main$viewBtnGen,
+						$author$project$Main$Value('0'),
+						'0'),
 						A2(
-						$elm$html$Html$button,
-						_List_fromArray(
-							[
-								$elm$html$Html$Events$onClick(
-								$author$project$Main$Executer($author$project$Main$updateClsOperator)),
-								$elm$html$Html$Attributes$class('btn-flat-border')
-							]),
-						_List_fromArray(
-							[
-								$elm$html$Html$text('C')
-							])),
+						$author$project$Main$viewBtnGen,
+						$author$project$Main$Executer($author$project$Main$updateClsOperator),
+						'C'),
 						A2(
-						$elm$html$Html$button,
-						_List_fromArray(
-							[
-								$elm$html$Html$Events$onClick(
-								$author$project$Main$Executer($author$project$Main$updateEqOperator)),
-								$elm$html$Html$Attributes$class('btn-flat-border')
-							]),
-						_List_fromArray(
-							[
-								$elm$html$Html$text('=')
-							]))
+						$author$project$Main$viewBtnGen,
+						$author$project$Main$Executer($author$project$Main$updateEqOperator),
+						'=')
 					]))
 			]));
 };

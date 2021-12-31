@@ -86,35 +86,40 @@ view model =
             [ text m.display
             ]
         , div [ class "btn-wrap" ]
-            [ button [ onClick (Value "1"), class "btn-flat-border" ] [ text "1" ]
-            , button [ onClick (Value "2"), class "btn-flat-border" ] [ text "2" ]
-            , button [ onClick (Value "3"), class "btn-flat-border" ] [ text "3" ]
-            , button [ onClick (Operator updateAddOperator), class "btn-flat-border" ] [ text "+" ]
+            [ viewBtnGen (Value "1") "1"
+            , viewBtnGen (Value "2") "2"
+            , viewBtnGen (Value "3") "3"
+            , viewBtnGen (Operator updateAddOperator) "+"
             ]
         , div [ class "btn-wrap" ]
-            [ button [ onClick (Value "4"), class "btn-flat-border"  ] [ text "4" ]
-            , button [ onClick (Value "5"), class "btn-flat-border"  ] [ text "5" ]
-            , button [ onClick (Value "6"), class "btn-flat-border"  ] [ text "6" ]
-            , button [ onClick (Operator updateSubOperator), class "btn-flat-border"  ] [ text "-" ]
+            [ viewBtnGen (Value "4") "4"
+            , viewBtnGen (Value "5") "5"
+            , viewBtnGen (Value "6") "6"
+            , viewBtnGen (Operator updateSubOperator) "-"
             ]
         , div [ class "btn-wrap" ]
-            [ button [ onClick (Value "7"), class "btn-flat-border"  ] [ text "7" ]
-            , button [ onClick (Value "8"), class "btn-flat-border"  ] [ text "8" ]
-            , button [ onClick (Value "9"), class "btn-flat-border"  ] [ text "9" ]
-            , button [ onClick (Operator updateMultOperator), class "btn-flat-border"  ] [ text "*" ]
-            , button [ onClick (Operator updateQuotOperator), class "btn-flat-border"  ] [ text "/" ]
+            [ viewBtnGen (Value "7") "7"
+            , viewBtnGen (Value "8") "8"
+            , viewBtnGen (Value "9") "9"
+            , viewBtnGen (Operator updateMultOperator) "*"
+            , viewBtnGen (Operator updateQuotOperator) "-"
             ]
         , div [ class "btn-wrap" ]
-            [ button [ onClick (Value "00"), class "btn-flat-border"  ] [ text "00" ]
-            , button [ onClick (Value "0"), class "btn-flat-border"  ] [ text "0" ]
-            , button [ onClick (Executer updateClsOperator), class "btn-flat-border"  ] [ text "C" ]
-            , button [ onClick (Executer updateEqOperator), class "btn-flat-border"  ] [ text "=" ]
+            [ viewBtnGen (Value "00") "00"
+            , viewBtnGen (Value "0") "0"
+            , viewBtnGen (Executer updateClsOperator) "C"
+            , viewBtnGen (Executer updateEqOperator) "="
             ]
         ]
 
+
+viewBtnGen : Msg -> String -> Html Msg
+viewBtnGen msg fieldTxt = 
+    button [ onClick (msg), class "btn-flat-border"  ] [ text fieldTxt ]
+
 normalizeDigits : String -> String 
 normalizeDigits s =
-    String.left 8 
+    String.left 12
     (case String.toFloat s of
             Nothing ->
                 s 
@@ -143,7 +148,7 @@ updateAddOperator model =
     Model m ->
         case List.map String.toFloat [m.memory, m.display] of
             [Just a, Just b] -> 
-                Model { m | memory = normalizeDigits (String.fromFloat) (a + b), display = "0", opr = \lam -> lam }
+                Model { m | memory = normalizeDigits (String.fromFloat (a + b)), display = "0", opr = \lam -> lam }
             _ -> model
 
 updateSubOperator : Model -> Model 
