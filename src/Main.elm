@@ -102,7 +102,7 @@ view model =
             , viewBtnGen (Value "8") "8"
             , viewBtnGen (Value "9") "9"
             , viewBtnGen (Operator updateMultOperator) "*"
-            , viewBtnGen (Operator updateQuotOperator) "-"
+            , viewBtnGen (Operator updateQuotOperator) "/"
             ]
         , div [ class "btn-wrap" ]
             [ viewBtnGen (Value "00") "00"
