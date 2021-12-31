@@ -178,7 +178,7 @@ updateEqOperator model =
     case model of
     Model m ->
         case m.state of
-            Inputting -> Model { m | display = m.display, state = Outputting }
+            Inputting -> Model { m | memory = m.display, display = m.display, state = Outputting }
             _ ->
                 let opm = m.opr (Model m)
                 in 
