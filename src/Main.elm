@@ -8,7 +8,10 @@ module Main exposing (..)
 
 
 import Browser
-import Html exposing (Html, button, div, text)
+import Html exposing (..)
+import Html.Attributes exposing (..)
+
+--  (Html, button, div, text,)
 import Html.Events exposing (onClick)
 
 
@@ -79,33 +82,33 @@ view model =
     case model of
     Model m ->
         div []
-        [ div []
+        [ div [ class "field" ]
             [ text m.display
             ]
-        , div []
-            [ button [ onClick (Value "1") ] [ text "1" ]
-            , button [ onClick (Value "2") ] [ text "2" ]
-            , button [ onClick (Value "3") ] [ text "3" ]
-            , button [ onClick (Operator updateAddOperator) ] [ text "+" ]
+        , div [ class "btn-wrap" ]
+            [ button [ onClick (Value "1"), class "btn-flat-border" ] [ text "1" ]
+            , button [ onClick (Value "2"), class "btn-flat-border" ] [ text "2" ]
+            , button [ onClick (Value "3"), class "btn-flat-border" ] [ text "3" ]
+            , button [ onClick (Operator updateAddOperator), class "btn-flat-border" ] [ text "+" ]
             ]
-        , div []
-            [ button [ onClick (Value "4") ] [ text "4" ]
-            , button [ onClick (Value "5") ] [ text "5" ]
-            , button [ onClick (Value "6") ] [ text "6" ]
-            , button [ onClick (Operator updateSubOperator) ] [ text "-" ]
+        , div [ class "btn-wrap" ]
+            [ button [ onClick (Value "4"), class "btn-flat-border"  ] [ text "4" ]
+            , button [ onClick (Value "5"), class "btn-flat-border"  ] [ text "5" ]
+            , button [ onClick (Value "6"), class "btn-flat-border"  ] [ text "6" ]
+            , button [ onClick (Operator updateSubOperator), class "btn-flat-border"  ] [ text "-" ]
             ]
-        , div []
-            [ button [ onClick (Value "7") ] [ text "7" ]
-            , button [ onClick (Value "8") ] [ text "8" ]
-            , button [ onClick (Value "9") ] [ text "9" ]
-            , button [ onClick (Operator updateMultOperator) ] [ text "*" ]
-            , button [ onClick (Operator updateQuotOperator) ] [ text "/" ]
+        , div [ class "btn-wrap" ]
+            [ button [ onClick (Value "7"), class "btn-flat-border"  ] [ text "7" ]
+            , button [ onClick (Value "8"), class "btn-flat-border"  ] [ text "8" ]
+            , button [ onClick (Value "9"), class "btn-flat-border"  ] [ text "9" ]
+            , button [ onClick (Operator updateMultOperator), class "btn-flat-border"  ] [ text "*" ]
+            , button [ onClick (Operator updateQuotOperator), class "btn-flat-border"  ] [ text "/" ]
             ]
-        , div []
-            [ button [ onClick (Value "00") ] [ text "00" ]
-            , button [ onClick (Value "0") ] [ text "0" ]
-            , button [ onClick (Executer updateClsOperator) ] [ text "CLS" ]
-            , button [ onClick (Executer updateEqOperator) ] [ text "=" ]
+        , div [ class "btn-wrap" ]
+            [ button [ onClick (Value "00"), class "btn-flat-border"  ] [ text "00" ]
+            , button [ onClick (Value "0"), class "btn-flat-border"  ] [ text "0" ]
+            , button [ onClick (Executer updateClsOperator), class "btn-flat-border"  ] [ text "C" ]
+            , button [ onClick (Executer updateEqOperator), class "btn-flat-border"  ] [ text "=" ]
             ]
         ]
 

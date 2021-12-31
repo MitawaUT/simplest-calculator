@@ -5248,6 +5248,15 @@ var $author$project$Main$Value = function (a) {
 	return {$: 0, a: a};
 };
 var $elm$html$Html$button = _VirtualDom_node('button');
+var $elm$json$Json$Encode$string = _Json_wrap;
+var $elm$html$Html$Attributes$stringProperty = F2(
+	function (key, string) {
+		return A2(
+			_VirtualDom_property,
+			key,
+			$elm$json$Json$Encode$string(string));
+	});
+var $elm$html$Html$Attributes$class = $elm$html$Html$Attributes$stringProperty('className');
 var $elm$html$Html$div = _VirtualDom_node('div');
 var $elm$virtual_dom$VirtualDom$Normal = function (a) {
 	return {$: 0, a: a};
@@ -5400,14 +5409,20 @@ var $author$project$Main$view = function (model) {
 			[
 				A2(
 				$elm$html$Html$div,
-				_List_Nil,
+				_List_fromArray(
+					[
+						$elm$html$Html$Attributes$class('field')
+					]),
 				_List_fromArray(
 					[
 						$elm$html$Html$text(m.a)
 					])),
 				A2(
 				$elm$html$Html$div,
-				_List_Nil,
+				_List_fromArray(
+					[
+						$elm$html$Html$Attributes$class('btn-wrap')
+					]),
 				_List_fromArray(
 					[
 						A2(
@@ -5415,7 +5430,8 @@ var $author$project$Main$view = function (model) {
 						_List_fromArray(
 							[
 								$elm$html$Html$Events$onClick(
-								$author$project$Main$Value('1'))
+								$author$project$Main$Value('1')),
+								$elm$html$Html$Attributes$class('btn-flat-border')
 							]),
 						_List_fromArray(
 							[
@@ -5426,7 +5442,8 @@ var $author$project$Main$view = function (model) {
 						_List_fromArray(
 							[
 								$elm$html$Html$Events$onClick(
-								$author$project$Main$Value('2'))
+								$author$project$Main$Value('2')),
+								$elm$html$Html$Attributes$class('btn-flat-border')
 							]),
 						_List_fromArray(
 							[
@@ -5437,7 +5454,8 @@ var $author$project$Main$view = function (model) {
 						_List_fromArray(
 							[
 								$elm$html$Html$Events$onClick(
-								$author$project$Main$Value('3'))
+								$author$project$Main$Value('3')),
+								$elm$html$Html$Attributes$class('btn-flat-border')
 							]),
 						_List_fromArray(
 							[
@@ -5448,7 +5466,8 @@ var $author$project$Main$view = function (model) {
 						_List_fromArray(
 							[
 								$elm$html$Html$Events$onClick(
-								$author$project$Main$Operator($author$project$Main$updateAddOperator))
+								$author$project$Main$Operator($author$project$Main$updateAddOperator)),
+								$elm$html$Html$Attributes$class('btn-flat-border')
 							]),
 						_List_fromArray(
 							[
@@ -5457,7 +5476,10 @@ var $author$project$Main$view = function (model) {
 					])),
 				A2(
 				$elm$html$Html$div,
-				_List_Nil,
+				_List_fromArray(
+					[
+						$elm$html$Html$Attributes$class('btn-wrap')
+					]),
 				_List_fromArray(
 					[
 						A2(
@@ -5465,7 +5487,8 @@ var $author$project$Main$view = function (model) {
 						_List_fromArray(
 							[
 								$elm$html$Html$Events$onClick(
-								$author$project$Main$Value('4'))
+								$author$project$Main$Value('4')),
+								$elm$html$Html$Attributes$class('btn-flat-border')
 							]),
 						_List_fromArray(
 							[
@@ -5476,7 +5499,8 @@ var $author$project$Main$view = function (model) {
 						_List_fromArray(
 							[
 								$elm$html$Html$Events$onClick(
-								$author$project$Main$Value('5'))
+								$author$project$Main$Value('5')),
+								$elm$html$Html$Attributes$class('btn-flat-border')
 							]),
 						_List_fromArray(
 							[
@@ -5487,7 +5511,8 @@ var $author$project$Main$view = function (model) {
 						_List_fromArray(
 							[
 								$elm$html$Html$Events$onClick(
-								$author$project$Main$Value('6'))
+								$author$project$Main$Value('6')),
+								$elm$html$Html$Attributes$class('btn-flat-border')
 							]),
 						_List_fromArray(
 							[
@@ -5498,7 +5523,8 @@ var $author$project$Main$view = function (model) {
 						_List_fromArray(
 							[
 								$elm$html$Html$Events$onClick(
-								$author$project$Main$Operator($author$project$Main$updateSubOperator))
+								$author$project$Main$Operator($author$project$Main$updateSubOperator)),
+								$elm$html$Html$Attributes$class('btn-flat-border')
 							]),
 						_List_fromArray(
 							[
@@ -5507,7 +5533,10 @@ var $author$project$Main$view = function (model) {
 					])),
 				A2(
 				$elm$html$Html$div,
-				_List_Nil,
+				_List_fromArray(
+					[
+						$elm$html$Html$Attributes$class('btn-wrap')
+					]),
 				_List_fromArray(
 					[
 						A2(
@@ -5515,7 +5544,8 @@ var $author$project$Main$view = function (model) {
 						_List_fromArray(
 							[
 								$elm$html$Html$Events$onClick(
-								$author$project$Main$Value('7'))
+								$author$project$Main$Value('7')),
+								$elm$html$Html$Attributes$class('btn-flat-border')
 							]),
 						_List_fromArray(
 							[
@@ -5526,7 +5556,8 @@ var $author$project$Main$view = function (model) {
 						_List_fromArray(
 							[
 								$elm$html$Html$Events$onClick(
-								$author$project$Main$Value('8'))
+								$author$project$Main$Value('8')),
+								$elm$html$Html$Attributes$class('btn-flat-border')
 							]),
 						_List_fromArray(
 							[
@@ -5537,7 +5568,8 @@ var $author$project$Main$view = function (model) {
 						_List_fromArray(
 							[
 								$elm$html$Html$Events$onClick(
-								$author$project$Main$Value('9'))
+								$author$project$Main$Value('9')),
+								$elm$html$Html$Attributes$class('btn-flat-border')
 							]),
 						_List_fromArray(
 							[
@@ -5548,7 +5580,8 @@ var $author$project$Main$view = function (model) {
 						_List_fromArray(
 							[
 								$elm$html$Html$Events$onClick(
-								$author$project$Main$Operator($author$project$Main$updateMultOperator))
+								$author$project$Main$Operator($author$project$Main$updateMultOperator)),
+								$elm$html$Html$Attributes$class('btn-flat-border')
 							]),
 						_List_fromArray(
 							[
@@ -5559,7 +5592,8 @@ var $author$project$Main$view = function (model) {
 						_List_fromArray(
 							[
 								$elm$html$Html$Events$onClick(
-								$author$project$Main$Operator($author$project$Main$updateQuotOperator))
+								$author$project$Main$Operator($author$project$Main$updateQuotOperator)),
+								$elm$html$Html$Attributes$class('btn-flat-border')
 							]),
 						_List_fromArray(
 							[
@@ -5568,7 +5602,10 @@ var $author$project$Main$view = function (model) {
 					])),
 				A2(
 				$elm$html$Html$div,
-				_List_Nil,
+				_List_fromArray(
+					[
+						$elm$html$Html$Attributes$class('btn-wrap')
+					]),
 				_List_fromArray(
 					[
 						A2(
@@ -5576,7 +5613,8 @@ var $author$project$Main$view = function (model) {
 						_List_fromArray(
 							[
 								$elm$html$Html$Events$onClick(
-								$author$project$Main$Value('00'))
+								$author$project$Main$Value('00')),
+								$elm$html$Html$Attributes$class('btn-flat-border')
 							]),
 						_List_fromArray(
 							[
@@ -5587,7 +5625,8 @@ var $author$project$Main$view = function (model) {
 						_List_fromArray(
 							[
 								$elm$html$Html$Events$onClick(
-								$author$project$Main$Value('0'))
+								$author$project$Main$Value('0')),
+								$elm$html$Html$Attributes$class('btn-flat-border')
 							]),
 						_List_fromArray(
 							[
@@ -5598,18 +5637,20 @@ var $author$project$Main$view = function (model) {
 						_List_fromArray(
 							[
 								$elm$html$Html$Events$onClick(
-								$author$project$Main$Executer($author$project$Main$updateClsOperator))
+								$author$project$Main$Executer($author$project$Main$updateClsOperator)),
+								$elm$html$Html$Attributes$class('btn-flat-border')
 							]),
 						_List_fromArray(
 							[
-								$elm$html$Html$text('CLS')
+								$elm$html$Html$text('C')
 							])),
 						A2(
 						$elm$html$Html$button,
 						_List_fromArray(
 							[
 								$elm$html$Html$Events$onClick(
-								$author$project$Main$Executer($author$project$Main$updateEqOperator))
+								$author$project$Main$Executer($author$project$Main$updateEqOperator)),
+								$elm$html$Html$Attributes$class('btn-flat-border')
 							]),
 						_List_fromArray(
 							[
