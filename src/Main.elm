@@ -143,7 +143,7 @@ updateAddOperator model =
     Model m ->
         case List.map String.toFloat [m.memory, m.display] of
             [Just a, Just b] -> 
-                Model { m | memory = String.fromFloat (a + b), display = "0", opr = \lam -> lam }
+                Model { m | memory = normalizeDigits (String.fromFloat) (a + b), display = "0", opr = \lam -> lam }
             _ -> model
 
 updateSubOperator : Model -> Model 
@@ -152,7 +152,7 @@ updateSubOperator model =
     Model m ->
         case List.map String.toFloat [m.memory, m.display] of
             [Just a, Just b] -> 
-                Model { m | memory = String.fromFloat (a - b), display = "0", opr = \lam -> lam }
+                Model { m | memory = normalizeDigits (String.fromFloat (a - b)), display = "0", opr = \lam -> lam }
             _ -> model
 
 updateMultOperator : Model -> Model 
@@ -161,7 +161,7 @@ updateMultOperator model =
     Model m ->
         case List.map String.toFloat [m.memory, m.display] of
             [Just a, Just b] -> 
-                Model { m | memory = String.fromFloat (a * b), display = "0", opr = \lam -> lam }
+                Model { m | memory = normalizeDigits (String.fromFloat (a * b)), display = "0", opr = \lam -> lam }
             _ -> model
 
 updateQuotOperator : Model -> Model 
@@ -170,7 +170,7 @@ updateQuotOperator model =
     Model m ->
         case List.map String.toFloat [m.memory, m.display] of
             [Just a, Just b] -> 
-                Model { m | memory = String.fromFloat (a / b), display = "0", opr = \lam -> lam }
+                Model { m | memory = normalizeDigits (String.fromFloat (a / b)), display = "0", opr = \lam -> lam }
             _ -> model
 
 updateEqOperator : Model -> Model 
