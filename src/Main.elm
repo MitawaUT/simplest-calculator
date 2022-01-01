@@ -47,7 +47,7 @@ update msg model =
 
     Executer func ->
         case String.toFloat model.display of
-        Just a -> { display = (normalizeDigits << String.fromFloat) (func (model.opr a)), opr = \m -> m, state = Result }
+        Just a -> { display = (normalizeDigits << String.fromFloat << func << model.opr) a, opr = \m -> m, state = Result }
         _ -> init
 
 -- VIEW
@@ -102,7 +102,7 @@ updateInputDigit : String -> String -> String
 updateInputDigit c s = s ++ c
 
 updateClsExecuter : Float -> Float
-updateClsExecuter a = 0
+updateClsExecuter _ = 0
 
 updateEqExecuter : Float -> Float
 updateEqExecuter a = a
