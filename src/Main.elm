@@ -12,6 +12,7 @@ main =
 -- MODEL
 
 type State = Waiting
+           | Operated
            | Result
 
 type alias Model = { display: String, opr: (Float -> Float), state: State }
@@ -32,23 +33,30 @@ update msg model =
     Value v -> 
         case model.state of
         Waiting -> { model | display = normalizeDigits <| updateInputDigit v model.display}
-        Result -> { model | display = normalizeDigits v, state = Waiting}
+        _ -> { model | display = normalizeDigits v, state = Waiting}
 
     Operator func ->
+        case String.toFloat model.display of
+        Just a -> 
+            case model.state of
+            Waiting ->
+                { display = (normalizeDigits << String.fromFloat) <| model.opr a, opr = (func <| model.opr a), state = Operated }    
+            Operated ->
+                { model | opr = func a, state = Operated }
+            Result ->
+                { model | opr = (func <| model.opr a), state = Operated }
+        _ -> init
+
+    Executer func ->
         case model.state of
         Waiting ->
             case String.toFloat model.display of
-            Just a -> { model | display = "0", opr = (func <| model.opr a) }
+            Just a -> { display = (normalizeDigits << String.fromFloat << func << model.opr) a, opr = \m -> m, state = Result }
             _ -> init
-        Result ->
+        _ ->
             case String.toFloat model.display of
-            Just a -> { display = "0", opr = (func (model.opr a)), state = Waiting }
-            _ -> init 
-
-    Executer func ->
-        case String.toFloat model.display of
-        Just a -> { display = (normalizeDigits << String.fromFloat << func << model.opr) a, opr = \m -> m, state = Result }
-        _ -> init
+            Just a -> { display = (normalizeDigits << String.fromFloat << func ) a, opr = \m -> m, state = Result }
+            _ -> init
 
 -- VIEW
 
