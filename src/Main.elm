@@ -12,19 +12,20 @@ main =
 -- MODEL
 
 type State = Waiting
+           | Operated
            | Result
 
-type alias Model = { display: String, opr: (Float -> Float), state: State }
+type alias Model = { display: String, opr: (Float -> Float), state: State, operator: String }
 
 init : Model
-init = { display = "0", opr = \m -> m, state = Waiting}
+init = { display = "0", opr = \m -> m, state = Waiting, operator = "  " }
 
 -- UPDATE
 
 type Msg
     = Value String
-    | Operator (Float -> Float -> Float)
-    | Executer (Float -> Float)
+    | Operator (Float -> Float -> Float) String
+    | Executer (Float -> Float) String
 
 update : Msg -> Model -> Model
 update msg model =
@@ -32,23 +33,30 @@ update msg model =
     Value v -> 
         case model.state of
         Waiting -> { model | display = normalizeDigits <| updateInputDigit v model.display}
-        Result -> { model | display = normalizeDigits v, state = Waiting}
+        _ -> { model | display = normalizeDigits v, state = Waiting}
 
-    Operator func ->
+    Operator func s ->
+        case String.toFloat model.display of
+        Just a -> 
+            case model.state of
+            Waiting ->
+                { display = (normalizeDigits << String.fromFloat) <| model.opr a, opr = (func <| model.opr a), state = Operated, operator = s }    
+            Operated ->
+                { model | opr = func a, state = Operated, operator = s }
+            Result ->
+                { model | opr = (func <| model.opr a), state = Operated, operator = s }
+        _ -> init
+
+    Executer func s ->
         case model.state of
         Waiting ->
             case String.toFloat model.display of
-            Just a -> { model | display = "0", opr = (func <| model.opr a) }
+            Just a -> { display = (normalizeDigits << String.fromFloat << func << model.opr) a, opr = \m -> m, state = Result, operator = s }
             _ -> init
-        Result ->
+        _ ->
             case String.toFloat model.display of
-            Just a -> { display = "0", opr = (func (model.opr a)), state = Waiting }
-            _ -> init 
-
-    Executer func ->
-        case String.toFloat model.display of
-        Just a -> { display = (normalizeDigits << String.fromFloat << func << model.opr) a, opr = \m -> m, state = Result }
-        _ -> init
+            Just a -> { display = (normalizeDigits << String.fromFloat << func ) a, opr = \m -> m, state = Result, operator = s }
+            _ -> init
 
 -- VIEW
 
@@ -56,38 +64,40 @@ view : Model -> Html Msg
 view model =
     div []
     [ div [ class "field" ]
-        [ text model.display ]
+        [ div[ class "operator" ] [text model.operator]
+        , div[ ] [text model.display]
+        ]
     , div [ class "btn-wrap" ]
-        [ viewBtnGen (Value "1") "1"
-        , viewBtnGen (Value "2") "2"
-        , viewBtnGen (Value "3") "3"
+        [ viewBtnGen (Value) "1"
+        , viewBtnGen (Value) "2"
+        , viewBtnGen (Value) "3"
         , viewBtnGen (Operator (+)) "+"
         ]
     , div [ class "btn-wrap" ]
-        [ viewBtnGen (Value "4") "4"
-        , viewBtnGen (Value "5") "5"
-        , viewBtnGen (Value "6") "6"
+        [ viewBtnGen (Value) "4"
+        , viewBtnGen (Value) "5"
+        , viewBtnGen (Value) "6"
         , viewBtnGen (Operator (-)) "-"
         ]
     , div [ class "btn-wrap" ]
-        [ viewBtnGen (Value "7") "7"
-        , viewBtnGen (Value "8") "8"
-        , viewBtnGen (Value "9") "9"
+        [ viewBtnGen (Value) "7"
+        , viewBtnGen (Value) "8"
+        , viewBtnGen (Value) "9"
         , viewBtnGen (Operator (*)) "*"
         , viewBtnGen (Operator (/)) "/"
         ]
     , div [ class "btn-wrap" ]
-        [ viewBtnGen (Value "00") "00"
-        , viewBtnGen (Value "0") "0"
+        [ viewBtnGen (Value) "00"
+        , viewBtnGen (Value) "0"
         , viewBtnGen (Executer updateClsExecuter) "C"
         , viewBtnGen (Executer updateEqExecuter) "="
         ]
     ]
 
 
-viewBtnGen : Msg -> String -> Html Msg
-viewBtnGen msg fieldTxt = 
-    button [ onClick (msg), class "btn-flat-border"  ] [ text fieldTxt ]
+viewBtnGen : (String -> Msg) -> String -> Html Msg
+viewBtnGen msg_ fieldTxt = 
+    button [ onClick (msg_ fieldTxt), class "btn-flat-border"  ] [ text fieldTxt ]
 
 normalizeDigits : String -> String 
 normalizeDigits s =
