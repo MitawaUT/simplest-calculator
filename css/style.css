@@ -35,21 +35,48 @@ a:link, a:visited, a:hover, a:active{
 }
 
 .btn-wrap {
-    /* display: inline-block; */
     vertical-align: middle;
     height: 90px;
 }
 
 .field {
-    height: 80px;
-    width: 350px;
-    font-size: 1.8em;
+  height: 80px;
+  width: 350px;
+    font-size: 1.5em;
     margin: 0px 10px 10px 0px;
   font-weight: bold;
-  padding: 0.5em 1em;
+  padding: 0.25em 0.5em;
   text-decoration: none;
   background: rgb(196, 195, 195);
   color: #272727;
   border: solid 5px #000000;
   border-radius: 5px;
+}
+
+.operator {
+  height: 20px;
+  width: 20px;
+  margin: 0px 10px 2.5px 0px;
+  font-size: 0.45em;
+  font-weight: bold;
+  display: inline-block;
+  padding: 0em 0em;
+  text-decoration: none;
+  background: rgb(27, 27, 27);
+  color: #ffffff;
+  border: solid 1px #272727;
+  border-radius: 1px;
+  text-align:center;
+}
+
+.display {
+  height: 20px;
+  width: 20px;
+  margin: 0px 0px 0px 0px;
+  font-size: 1em;
+  font-weight: bold;
+  display: inline-block;
+  padding: 0em 0em;
+  text-decoration: none;
+  text-align:center;
 }
