@@ -45,18 +45,15 @@ update msg model =
                 { model | opr = func a, state = Operated, operator = s }
             Result ->
                 { model | opr = (func <| model.opr a), state = Operated, operator = s }
-        _ -> init
+        _ -> { init | operator = "E" }
 
     Executer func s ->
-        case model.state of
-        Waiting ->
-            case String.toFloat model.display of
-            Just a -> { display = (normalizeDigits << String.fromFloat << func << model.opr) a, opr = \m -> m, state = Result, operator = s }
-            _ -> init
-        _ ->
-            case String.toFloat model.display of
-            Just a -> { display = (normalizeDigits << String.fromFloat << func ) a, opr = \m -> m, state = Result, operator = s }
-            _ -> init
+        case String.toFloat model.display of
+        Just a -> 
+            case model.state of
+            Waiting -> { display = (normalizeDigits << String.fromFloat << func << model.opr) a, opr = \m -> m, state = Result, operator = s }
+            _ -> { display = (normalizeDigits << String.fromFloat << func ) a, opr = \m -> m, state = Result, operator = s }
+        _ -> { init | operator = "E" }
 
 -- VIEW
 
