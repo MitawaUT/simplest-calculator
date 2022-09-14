@@ -5,7 +5,7 @@
 
 フロントエンドには苦手意識があるんですが，これならやってもいいかなと思いました (小並感) 。
 
-[こちら](https://mitawaut.github.io/simplest-calculator/) で遊べます。
+[こちら](https://somisawa.github.io/simplest-calculator/ ) で遊べます。
 
 2022/01/01 追記：リファクタしました (60 分縛りが破れる)
 
